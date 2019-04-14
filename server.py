@@ -1,11 +1,5 @@
-from app.factory import text_clustering
+from app import app
+from app.routes import clustering, web
 
-documents = [
-    "hello my name is thiago", "hello my name is camila",
-    "hi my name is camila", "i like to ride car", "i like to ride many cars",
-    "i love to drive cars"
-]
-
-ds = text_clustering.start_clustering(documents)
-
-print(ds)
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=8080, debug=True)
