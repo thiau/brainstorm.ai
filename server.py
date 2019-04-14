@@ -1,20 +1,20 @@
-from server import TextProcessor
-from server import encode
+from server import TextProcessor, encode, Clustering
 
 documents = [
-    "I want to conquer the world",
-    "world been had done languages cities mice 2"
+    "hello my name is thiago", "hello my name is camila",
+    "hi my name is camila", "i like to ride car", "i like to ride many cars",
+    "i love to drive cars"
 ]
 
 text_processor = TextProcessor(sentences=documents)
 text_processor.process_text()
-sentence_tokens = text_processor.get_sentence_tokens()
 corpus = text_processor.get_corpus()
 
-print(sentence_tokens)
-print(corpus)
+encoded_count = encode("count", corpus)
+encoded_tfidf = encode("tfidf", encoded_count)
 
-# encoded_count = encode("count", sentence_tokens)
-encoded_tfidf = encode("tfidf", sentence_tokens)
+clustering = Clustering(features=encoded_tfidf, corpus=corpus)
+clustering.cluster("dbscan", eps=1, min_samples=1, n_jobs=4)
+cluster_ds = clustering.get_cluster_dataset()
 
-print(encoded_tfidf)
+print(cluster_ds)
