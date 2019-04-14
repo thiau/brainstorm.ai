@@ -3,10 +3,7 @@
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 
-ENCODERS = {
-    "tfidf": TfidfTransformer,
-    "count": CountVectorizer
-}
+ENCODERS = {"tfidf": TfidfTransformer, "count": CountVectorizer}
 
 
 def encode(method, corpus, **kwargs):

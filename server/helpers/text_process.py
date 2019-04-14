@@ -47,8 +47,9 @@ class TextProcessor:
             tokens = self.remove_stopwords(tokens)
             tokens = self.lemmatize_word(tokens)
 
+            # corpus creation
             self.sentence_tokens.append(tokens)
-            self.corpus = self.corpus + tokens
+            self.corpus.append(" ".join(tokens))
 
     def get_sentence_tokens(self):
         return self.sentence_tokens
