@@ -1,4 +1,4 @@
-from server import TextProcessor, encode, Clustering
+from app.factory import text_clustering
 
 documents = [
     "hello my name is thiago", "hello my name is camila",
@@ -6,15 +6,6 @@ documents = [
     "i love to drive cars"
 ]
 
-text_processor = TextProcessor(sentences=documents)
-text_processor.process_text()
-corpus = text_processor.get_corpus()
+ds = text_clustering.start_clustering(documents)
 
-encoded_count = encode("count", corpus)
-encoded_tfidf = encode("tfidf", encoded_count)
-
-clustering = Clustering(features=encoded_tfidf, corpus=corpus)
-clustering.cluster("dbscan", eps=1, min_samples=1, n_jobs=4)
-cluster_ds = clustering.get_cluster_dataset()
-
-print(cluster_ds)
+print(ds)
